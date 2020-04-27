@@ -1,7 +1,7 @@
 
-Mini i-Drive – Calibration & Test 
+Mini Control – Calibration & Test 
 
-Code summary: The Mini-iDrive (MiD) code contains the following files:
+Code summary: The Mini Control code contains the following files:
 1.	m00_Config.py
 2.	m01_SoreCalibData.py
 3.	m02_Calibration.py
@@ -20,7 +20,7 @@ Dependencies:
 •	pyserial
 •	magpylib v2.2.0+ (included in the folder)
 •	tkinter (for visualization only)
-
+• bitstring
 
 Calibration and Test
 To calibrate and test the system follow the steps below:
