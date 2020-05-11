@@ -20,7 +20,6 @@ ADDITIONAL INFO: The script uses a genetic evolution algorithm
 #%% 5-circle calib
 import numpy as np
 import scipy.optimize as opt
-import time
 from m98_magMapEval import distToCircV
 from m00_Config import CONFIG
 
@@ -78,8 +77,10 @@ if __name__ == "__main__": #mupltiprocessing guard
     # store result
     np.save(folder + filename,result.x)
 
-    print('Calibration completete.')                        #text output
+    print(result.message)                        #text output
     print('Storing tolerances in ' +  filename + '.npy')    #text output
-    
-
+    if result.fun > 0.02:
+        print('#########################')
+        print('Optimization score: {}'.format(result.fun))
+        print('Please start the calibration process again (m01_StoreCalibData.py) and follow the instructions carefully. The optimization score is higher than the acceptable value (0.02)')
 

@@ -49,8 +49,13 @@ BUFFER = np.zeros((10,3))           #create a B-field buffer
 CALIB_DATA = np.ones((20,3))*9999   #store found states (4 rotations * 5 tilts) here, allocate with large values
 
 print('------------------------')                    # text output
-print('Start calibration scheme')                    # text output 
-S1 = [[i+1,j] for i in range(4) for j in range(5)]   # text output
+print('Start calibration scheme')
+
+
+tlt_pos = ['Center','Forward','Left','Back','Right']
+knob_pos = ['','Forward','Left','Back','Right']                    # text output 
+
+S1 = [[knob_pos[i+1],tlt_pos[j]] for i in range(4) for j in range(5)]   # text output
 S2 = (['Tilt']*4 + ['Rotate'])*4                     # text output
 
 for ii,s1,s2 in zip(range(20),S1,S2):
@@ -73,13 +78,19 @@ for ii,s1,s2 in zip(range(20),S1,S2):
             if minDist > 160: 
                 # different calib states are at least ~200LSB apart. By choosing a large threshhold
                 #     here we avoid to accidently sample states that are close to each other. 
+
                 #     E.g. after tilting we move back to the center. The system then detects a new stable
                 #     center state that will be close to the first one. But because we have rotated the 
                 #     system a little bit by accident it will not be very close. This must be caught by
                 #     this theshhold.
                 #     This is also the reason why we initialize CALIB_DATA with very 'distant' states.
 
-                print('State ' + str(s1) + ' detected! '+s2+' to next position.')
+                print('State ' + str(s1) + ' detected!')
+                if ii == 19:
+                    print('Done')
+                else:
+                    print( s2 + ' to next position ' + str(S1[ii+1]))
+                    print('##################')
                 winsound.Beep(500,100)    # sound output when a new state is found.
                 CALIB_DATA[ii] = BUF_av   # store new state
                 break
