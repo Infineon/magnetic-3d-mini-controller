@@ -51,9 +51,14 @@ def readSensor(serial):
         #print(B)
         return B
 
-    except Exception as e:
+    except (Exception,KeyboardInterrupt) as e:
         print('sensor communication broke down')
         print(str(e))
+        serial.flushInput()
+        time.sleep(0.2)
+        serial.flushOutput()
+        time.sleep(0.2)
+        
         serial.close() # Only executes once the loop exits
         sys.exit()
 
@@ -62,15 +67,18 @@ def readSensor(serial):
 def getXMCserialConnection(): 
     # returns serial port object
     # opens the serial port to communicate with the XMC
-    
+    global ser
     ports = list(serial.tools.list_ports.comports())
     if (len(ports) != 0):
         for p in ports:
             if ((p.pid == 261) & (p.vid == 4966)): # pid and vid from xmc
                 print("XMC found on port: " + p.device)
-                ser = serial.Serial(p.device, 115200)
-                print('Serial Connection Done')
-                return ser
-    
+                try:
+                    ser = serial.Serial(p.device, 115200)
+                    print('Serial Connection Done')
+                    return ser
+                except Exception:
+                    print('Please unplug then plug back the device')
+                    print('Serial Connection Done')
     print('ERROR(getSerialConnection) - Cannot Find a device.')
     sys.exit()
