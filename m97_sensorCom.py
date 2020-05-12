@@ -39,9 +39,9 @@ def readSensor(serial):
     try:
         # request data   21 
         serial.flushInput()
-        serial.write('90 232'.encode('utf8'))
-        serial.write('90 223'.encode('utf8'))
-        serial.write('90 203'.encode('utf8'))
+        ser.write('0xa5 0xe8'.encode('utf8'))
+        ser.write('0xa5 0xdd'.encode('utf8'))
+        ser.write('0x5a 0wcb'.encode('utf8'))
         #print(ser.out_waiting)
         msg_b = serial.read(8)
         encoded = str(base64.b16encode(msg_b))
