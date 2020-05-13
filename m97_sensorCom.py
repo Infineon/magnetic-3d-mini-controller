@@ -39,10 +39,12 @@ def readSensor(serial):
     try:
         # request data   21 
         serial.flushInput()
-        ser.write('0xa5 0xe8'.encode('utf8'))
-        ser.write('0xa5 0xdd'.encode('utf8'))
-        ser.write('0x5a 0wcb'.encode('utf8'))
-        #print(ser.out_waiting)
+        string = "5A E8 5A DF 5A CB" #Long range - Fast mode - Start periodic readout
+        
+        cmd_bytes = bytearray.fromhex(string)
+        
+        ser.write(cmd_bytes)
+        
         msg_b = serial.read(8)
         encoded = str(base64.b16encode(msg_b))
         encoded = encoded.replace("b'","")
