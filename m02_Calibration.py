@@ -20,7 +20,7 @@ ADDITIONAL INFO: The script uses a genetic evolution algorithm
 #%% 5-circle calib
 import numpy as np
 import scipy.optimize as opt
-from m98_magMapEval import distToCircV
+from lib.m98_magMapEval import distToCircV
 from m00_Config import CONFIG
 
 # load experimental data
@@ -34,7 +34,7 @@ filename = CONFIG['filenameTols']
 
 # define the cost function  
 def costBad2(tols): #mean squared badness
-    distToGoodCircV,distToBadCircV = distToCircV(datE,tols,72)
+    distToGoodCircV,distToBadCircV = distToCircV(datE,tols,200)
     BAD2 = np.sum((distToGoodCircV/distToBadCircV)**2)/20 #20 values in datE
     return BAD2
 

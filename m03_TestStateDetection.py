@@ -11,8 +11,8 @@ Running the script will create a console output [TILT,ROT] of the
 #%% IMPORT & FIG
 import numpy as np
 from numpy import array, amin
-from m97_sensorCom import readSensor, getXMCserialConnection
-from m99_BfieldSimulation import simulateField13V as simulateField
+from lib.m97_sensorCom import readSensor, getXMCserialConnection
+from lib.m99_BfieldSimulation import simulateField13V as simulateField
 from m00_Config import CONFIG
 import time
 

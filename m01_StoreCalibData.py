@@ -33,10 +33,9 @@ calibration to work decently - hence this 4-rot position scheme
 #%% MAIN
 import numpy as np
 import time
-from m97_sensorCom import readSensor, getXMCserialConnection
+from lib.m97_sensorCom import readSensor, getXMCserialConnection
 import winsound
 from m00_Config import CONFIG
-
 # calib data is stored here
 folder = CONFIG['folder']
 filename = CONFIG['filenameCalib']
@@ -46,11 +45,13 @@ ser = getXMCserialConnection()
 
 # start read-out algorithm -----------------------------------------------
 BUFFER = np.zeros((10,3))           #create a B-field buffer
-CALIB_DATA = np.ones((20,3))*9999   #store found states (4 rotations * 5 tilts) here, allocate with large values
+CALIB_DATA = np.ones((20,3))*999                            #store found states (4 rotations * 5 tilts) here, allocate with large values
 
 print('------------------------')                    # text output
 print('Start calibration scheme')
 
+inpt =  input("Please verify that the direction knob is initially pointing to the Forward position (Relative to the 0°). Press enter when ready.")
+print('######################')
 
 tlt_pos = ['Center','Forward','Left','Back','Right']
 knob_pos = ['','Forward','Left','Back','Right']                    # text output 
@@ -58,12 +59,33 @@ knob_pos = ['','Forward','Left','Back','Right']                    # text output
 S1 = [[knob_pos[i+1],tlt_pos[j]] for i in range(4) for j in range(5)]   # text output
 S2 = (['Tilt']*4 + ['Rotate'])*4                     # text output
 
+text_output = ['Tilt/Push the joystic Forward, wait for the beep and then release.',
+               'Tilt/Push the joystic to the Left, wait for the beep and then release.',
+               'Tilt/Push the joystic Backward, wait for the beep and then release.',
+               'Tilt/Push the joystic to the Right, wait for the beep and then release.',
+               'Rotate the joystic 90° counterclockwise, wait for the beep and then release.',
+               'Tilt/Push the joystic Forward, wait for the beep and then release.',
+               'Tilt/Push the joystic to the Left, wait for the beep and then release.',
+               'Tilt/Push the joystic Backward, wait for the beep and then release.',
+               'Tilt/Push the joystic to the Right, wait for the beep and then release.',
+               'Rotate the joystic 90° counterclockwise, wait for the beep and then release.',
+               'Tilt/Push the joystic Forward, wait for the beep and then release.',
+               'Tilt/Push the joystic to the Left, wait for the beep and then release.',
+               'Tilt/Push the joystic Backward, wait for the beep and then release.',
+               'Tilt/Push the joystic to the Right, wait for the beep and then release.',
+               'Rotate the joystic 90° counterclockwise, wait for the beep and then release.',
+               'Tilt/Push the joystic Forward, wait for the beep and then release.',
+               'Tilt/Push the joystic to the Left, wait for the beep and then release.',
+               'Tilt/Push the joystic Backward, wait for the beep and then release.',
+               'Tilt/Push the joystic to the Right, wait for the beep and then release.']
+
 for ii,s1,s2 in zip(range(20),S1,S2):
 
     while 1:
 
         #store state in buffer
         B = readSensor(ser)
+        #print(B)
         BUFFER = np.roll(BUFFER,1,axis=0)
         BUFFER[0] = B
 
@@ -89,7 +111,8 @@ for ii,s1,s2 in zip(range(20),S1,S2):
                 if ii == 19:
                     print('Done')
                 else:
-                    print( s2 + ' to next position ' + str(S1[ii+1]))
+                    #print( s2 + ' to next position ' + str(S1[ii+1]))
+                    print(text_output[ii])
                     print('##################')
                 winsound.Beep(500,100)    # sound output when a new state is found.
                 CALIB_DATA[ii] = BUF_av   # store new state
@@ -99,6 +122,7 @@ for ii,s1,s2 in zip(range(20),S1,S2):
 
 
 # reshape CALIB_DATA and store
+ser.close()
 dat = CALIB_DATA.reshape((4,5,3))
 dat = np.swapaxes(dat,0,1)
 np.save(folder+filename,dat)

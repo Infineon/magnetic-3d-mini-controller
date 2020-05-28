@@ -2,9 +2,9 @@ import numpy as np
 import tkinter as tk
 import threading
 from tkinter import messagebox as tkMessageBox
-from m96_visualization import IDriveVisualizer
-from m97_sensorCom import readSensor, getXMCserialConnection
-from m99_BfieldSimulation import simulateField13V as simulateField
+from lib.m96_visualization import IDriveVisualizer
+from lib.m97_sensorCom import readSensor, getXMCserialConnection
+from lib.m99_BfieldSimulation import simulateField13V as simulateField
 from m00_Config import CONFIG
 
 
@@ -55,12 +55,12 @@ class IDriveCommunicator(threading.Thread):
             
             B = readSensor(self.ser)
 
-            field_BUFFER = np.roll(field_BUFFER,1,axis=0)
-            field_BUFFER[0] = B
-            field_BUF_av = np.mean(field_BUFFER,axis=0)
+            #field_BUFFER = np.roll(field_BUFFER,1,axis=0)
+            #field_BUFFER[0] = B
+            #field_BUF_av = np.mean(field_BUFFER,axis=0)
 
             # compare to look-up, determine closest
-            dists = np.linalg.norm(self.Bs-field_BUF_av,axis=1)
+            dists = np.linalg.norm(self.Bs-B,axis=1)
             argMin = np.argmin(dists)
             Min = dists[argMin]
 
