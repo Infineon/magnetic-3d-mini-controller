@@ -1,0 +1,5 @@
+device XMC1100-0064
+loadbin fw.bin,0x10001000
+r
+g
+exit

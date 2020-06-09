@@ -1,0 +1,1 @@
+JLink.exe -CommanderScript flash2GoKit.jlink
