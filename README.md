@@ -1,11 +1,17 @@
-# Mini Control
+# Mini Controler
 
-![alt text](https://www.infineon.com/export/sites/default/media/products/Sensors/3D-Magnetic-Sensor2GO_TLC1930-W286_Board_and_Button.jpg_422899829.jpg)
+The application kit contains :
 
-![alt text](https://www.infineon.com/export/sites/default/media/products/Sensors/3D-Magnetic-Sensor2GO_TLC1930-W286_Button.jpg_824455825.jpg)
+* Mini controller with 4 tilt directions and 360° rotation.
+* The Infineon XENSIV(TM) 3D Magnetic Sensor 2GO kit
 
 
+<p float="left">
+  <img src="https://www.infineon.com/export/sites/default/media/products/Sensors/3D-Magnetic-Sensor2GO_TLC1930-W286_Board_and_Button.jpg_422899829.jpg" width="200" />
+  <img src="https://www.infineon.com/export/sites/default/media/products/Sensors/3D-Magnetic-Sensor2GO_TLC1930-W286_Button.jpg_824455825.jpg" width="200" /> 
+</p>
 
+The Mini controller is a joystick with five tilt positions as well as a 360° knob rotation. The principle idea is to detect all motion degrees by combining a single magnet with one 3D magnetic field sensor. 
 
 Code summary: The Mini Control code contains the following files:
 1.	m00_Config.py
