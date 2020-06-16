@@ -2,8 +2,8 @@
 
 The application kit contains :
 
-* Mini controller with 4 tilt directions and 360° rotation.
-* The Infineon XENSIV(TM) 3D Magnetic Sensor 2GO kit
+* Mini controller with 5 tilt directions and a 360° knob rotation.
+* The Infineon XENSIV(TM) 3D Magnetic Sensor 2GO kit : a budget-priced evaluation board equipped with a magnetic sensor for three dimensional measurement combined with an ARM® Cortex™-M0 CPU. It has a complete set of on-board devices, including an on-board debugger. 
 
 
 <p float="left">
@@ -13,7 +13,10 @@ The application kit contains :
 
 The Mini controller is a joystick with five tilt positions as well as a 360° knob rotation. The principle idea is to detect all motion degrees by combining a single magnet with one 3D magnetic field sensor. 
 
-Code summary: The Mini Control code contains the following files:
+## Code summary: 
+
+The Mini Control code contains the following files:
+
 1.	m00_Config.py
 2.	m01_SoreCalibData.py
 3.	m02_Calibration.py
