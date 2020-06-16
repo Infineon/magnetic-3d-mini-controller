@@ -1,4 +1,4 @@
-# Mini Controler
+# Mini Controller
 
 The application kit contains :
 
