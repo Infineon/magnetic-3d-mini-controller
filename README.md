@@ -13,6 +13,10 @@ The application kit contains :
 
 The Mini controller is a joystick with five tilt positions as well as a 360° knob rotation. The principle idea is to detect all motion degrees by combining a single magnet with one 3D magnetic field sensor. 
 
+#### Patent Note
+*Magnetic circuit patented by Infineon Technologies AG*
+
+
 ## Code summary: 
 
 The Mini Control code contains the following files:
